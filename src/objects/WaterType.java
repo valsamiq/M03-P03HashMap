@@ -25,7 +25,6 @@ public abstract class WaterType extends Pokemon {
     public void setType(String type) {
         this.type = type;
     }
-    
 //   (\_(\
 // =( °w° )=
 //   )   ( //
