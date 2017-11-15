@@ -106,7 +106,6 @@ public class Frame0 extends javax.swing.JFrame {
                 frame.setVisible(true);
                 
     }//GEN-LAST:event_jToggleButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -141,7 +140,6 @@ public class Frame0 extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToggleButton jToggleButton1;
