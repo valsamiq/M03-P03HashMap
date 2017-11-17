@@ -9,7 +9,7 @@ package objects;
  *
  * @author balsamiq
  */
-public abstract class WaterType extends Pokemon {
+public class WaterType extends Pokemon {
     
     private String type;
 
@@ -25,9 +25,15 @@ public abstract class WaterType extends Pokemon {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public boolean catchable() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 //   (\_(\
 // =( °w° )=
 //   )   ( //
 //  (__ __)/
 // balsamiq   
+
 }

@@ -10,8 +10,7 @@ package objects;
  * @author balsamiq
  */
 interface Catchable {
-    //private boolean Catch;
-    
+    public boolean catchable();
 //   (\_(\
 // =( °w° )=
 //   )   ( //

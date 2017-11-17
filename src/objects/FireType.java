@@ -9,14 +9,20 @@ package objects;
  *
  * @author balsamiq
  */
-public abstract class FireType extends Pokemon {
+public class FireType extends Pokemon {
 
     public FireType(String name, int atk, int def, int hp) {
         super(name, atk, def, hp);
+    }
+
+    @Override
+    public boolean catchable() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 //   (\_(\
 // =( °w° )=
 //   )   ( //
 //  (__ __)/
 // balsamiq   
+
 }

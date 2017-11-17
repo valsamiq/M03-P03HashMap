@@ -9,7 +9,7 @@ package objects;
  *
  * @author daw2
  */
-public abstract class PlantType extends Pokemon{
+public class PlantType extends Pokemon{
     private String hab;
 
     public PlantType(String hab, String name, int atk, int def, int hp) {
@@ -24,9 +24,14 @@ public abstract class PlantType extends Pokemon{
     public void setHab(String hab) {
         this.hab = hab;
     }
+    @Override
+    public boolean catchable() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 //   (\_(\
 // =( °w° )=
 //   )   ( //
 //  (__ __)/
 // balsamiq   
+
 }
