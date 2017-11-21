@@ -5,9 +5,11 @@
  */
 package main;
 
+import static main.M03P03HashMap.AllPokemon;
 import objects.PlantType;
-import objects.Pokemon;
 import objects.WaterType;
+import objects.FireType;
+import objects.Pokemon;
 
 /**
  *
@@ -221,6 +223,7 @@ public class AddPokemon extends javax.swing.JFrame {
     }
     
         //This allow us to unblock the disabled fields depending of the Pokemon incomming
+        //Otherwise, if is not a pokemon, or is a Fire type pokemon, no fields will be unblock.
     public void pokeTypeSelected(String type){
         disableFields();
         if(!(type.equals(" "))){
@@ -246,7 +249,7 @@ public class AddPokemon extends javax.swing.JFrame {
         int def = (int) jSpinner2.getValue();
         int hp = (int) jSpinner3.getValue();
         WaterType pkm = new WaterType(type,name,atk,def,hp);
-        //Pokemon.put(pkm.getName(),pkm);
+        AllPokemon.put(pkm.getName(),pkm);
     }
     public void addPokePlant(){
         String hab = jTextField1.getText();
@@ -255,7 +258,15 @@ public class AddPokemon extends javax.swing.JFrame {
         int def = (int) jSpinner2.getValue();
         int hp = (int) jSpinner3.getValue();
         PlantType pkm = new PlantType(hab,name,atk,def,hp);
-        
+        AllPokemon.put(pkm.getName(),pkm);
+    }
+    public void addPokeFire(){
+        String name = jTextField2.getText();
+        int atk = (int) jSpinner1.getValue();
+        int def = (int) jSpinner2.getValue();
+        int hp = (int) jSpinner3.getValue();
+        FireType pkm = new FireType(name,atk,def,hp);
+        AllPokemon.put(pkm.getName(),pkm);
     }
     
     
