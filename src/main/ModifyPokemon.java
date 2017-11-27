@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import static main.M03P03HashMap.AllPokemon;
 import objects.Pokemon;
-
 /**
  *
  * @author balsamiq
@@ -23,6 +22,18 @@ public class ModifyPokemon extends javax.swing.JFrame {
      */
     public ModifyPokemon() {
         initComponents();
+        
+        
+        //This fills the list, with every name registred.
+        //It is necessary to clear lists, before being generated again. If not, will cat. with the old one.
+        pokeList.clear();
+        for(String i : AllPokemon.keySet()){
+            String pkm = AllPokemon.get(i).getName();
+            pokeList.add(pkm);
+        }
+        jComboBox1.setModel(new DefaultComboBoxModel(pokeList.toArray()));
+        
+        selPokeList();
     }
 
     ModifyPokemon(Frame0 aThis, boolean b) {
@@ -191,24 +202,33 @@ public class ModifyPokemon extends javax.swing.JFrame {
             }
         });
     }
-    // This will 
-    public void pokeList(){
-        String tmp = jComboBox1.getSelectedItem().toString();
-        for(Pokemon p : AllPokemon.values()){
-            
-            if(tmp.equals(AllPokemon.get(p.getName()).getName())){
+    public void applyChanges(){
+        //This will let the program proceed, only if there's something on the list
+        if(jComboBox1.getItemCount()!=0){
+            String tmp = jComboBox1.getSelectedItem().toString();
+            for (String i : AllPokemon.keySet()){
+                int hp = (int) jSpinner1.getValue();
+                selected.setHp(hp);
+                int atk = (int) jSpinner2.getValue();
+                selected.setAtk(atk);
+                int def = (int) jSpinner3.getValue();
+                selected.setDef(def);
                 
+                AllPokemon.put(i, selected);
             }
         }
     }
-    public void listPokeNames(){
-        //is necessary to clear lists, before being generated again. If not, will cat. with the old one.
-        pokeList.clear();
-        for(String i : AllPokemon.keySet()){
-            String j = AllPokemon.get(i).getName();
-            pokeList.add(j);
+    
+    public void selPokeList(){
+        String tmp = jComboBox1.getSelectedItem().toString();
+        for(Pokemon p : AllPokemon.values()){
+            if(tmp.equals(AllPokemon.get(p.getName()).getName())){
+                selected = p;
+                jSpinner1.setValue(selected.getHp());
+                jSpinner2.setValue(selected.getAtk());
+                jSpinner3.setValue(selected.getDef());
+            }
         }
-        jComboBox1.setModel(new DefaultComboBoxModel(pokeList.toArray()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
