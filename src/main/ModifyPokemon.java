@@ -7,6 +7,7 @@ package main;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import static main.M03P03HashMap.AllPokemon;
 import objects.Pokemon;
 /**
@@ -20,10 +21,8 @@ public class ModifyPokemon extends javax.swing.JFrame {
     /**
      * Creates new form ModifyPokemon
      */
-    public ModifyPokemon() {
+    public ModifyPokemon(java.awt.Frame parent, boolean modal) {
         initComponents();
-        
-        
         //This fills the list, with every name registred.
         //It is necessary to clear lists, before being generated again. If not, will cat. with the old one.
         pokeList.clear();
@@ -34,10 +33,6 @@ public class ModifyPokemon extends javax.swing.JFrame {
         jComboBox1.setModel(new DefaultComboBoxModel(pokeList.toArray()));
         
         selPokeList();
-    }
-
-    ModifyPokemon(Frame0 aThis, boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -61,6 +56,7 @@ public class ModifyPokemon extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -75,6 +71,8 @@ public class ModifyPokemon extends javax.swing.JFrame {
 
         jLabel5.setText("Health Points:");
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(20, 20, 120, 1));
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,9 +80,18 @@ public class ModifyPokemon extends javax.swing.JFrame {
             }
         });
 
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+
+        jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, 0, 50, 1));
+
         jLabel6.setText("Pokemon Type:");
 
         jButton1.setText("Apply");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +99,8 @@ public class ModifyPokemon extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("-     -");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +126,10 @@ public class ModifyPokemon extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(115, 115, 115)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)))
                 .addContainerGap(223, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,7 +148,9 @@ public class ModifyPokemon extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -167,6 +181,10 @@ public class ModifyPokemon extends javax.swing.JFrame {
         // Calcel Button (JButton2)
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        applyChanges();
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
      * @param args the command line arguments
@@ -198,7 +216,14 @@ public class ModifyPokemon extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyPokemon().setVisible(true);
+                ModifyPokemon dialog = new ModifyPokemon(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -215,10 +240,12 @@ public class ModifyPokemon extends javax.swing.JFrame {
                 selected.setDef(def);
                 
                 AllPokemon.put(i, selected);
+                JOptionPane.showMessageDialog(this, "Values changed correctly!","Modification Success", JOptionPane.ERROR_MESSAGE);
+                
             }
         }
     }
-    
+
     public void selPokeList(){
         String tmp = jComboBox1.getSelectedItem().toString();
         for(Pokemon p : AllPokemon.values()){
@@ -241,6 +268,7 @@ public class ModifyPokemon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;

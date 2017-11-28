@@ -5,6 +5,7 @@
  */
 package main;
 
+import javax.swing.JOptionPane;
 import static main.M03P03HashMap.AllPokemon;
 import objects.PlantType;
 import objects.WaterType;
@@ -43,7 +44,6 @@ public class AddPokemon extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
@@ -52,6 +52,7 @@ public class AddPokemon extends javax.swing.JFrame {
         jSpinner2 = new javax.swing.JSpinner();
         jSpinner3 = new javax.swing.JSpinner();
         jTextField2 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 300));
@@ -73,13 +74,6 @@ public class AddPokemon extends javax.swing.JFrame {
         jLabel7.setText("Water Type:");
 
         jLabel8.setText("Habitat:");
-
-        jToggleButton1.setText("Proceed");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
 
         jToggleButton2.setText("Cancel");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +97,13 @@ public class AddPokemon extends javax.swing.JFrame {
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(20, 20, 100, 1));
 
+        jButton1.setText("Proceed");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,8 +118,8 @@ public class AddPokemon extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jToggleButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,24 +191,12 @@ public class AddPokemon extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton1))
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        if(TypePokemon.equals("")){
-            //Error Message?
-        }if(TypePokemon.equals("Water")){
-            
-        }if(TypePokemon.equals("Fire")){
-            
-        }if(TypePokemon.equals("Plant")){
-            
-        }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         TypePokemon = jComboBox3.getSelectedItem().toString();
@@ -217,9 +206,35 @@ public class AddPokemon extends javax.swing.JFrame {
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(TypePokemon.equals("")){
+            JOptionPane.showMessageDialog(this, "PokeType Wrong Selected","PokeError", JOptionPane.OK_OPTION);
+        }if(TypePokemon.equals("Water")){
+            addPokeWater();
+            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+            restartValues();
+        }if(TypePokemon.equals("Fire")){
+            addPokeFire();
+            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+            restartValues();
+        }if(TypePokemon.equals("Plant")){
+            addPokePlant();
+            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+            restartValues();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void restartValues(){
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jSpinner1.setValue(0);
+        jSpinner2.setValue(0);
+        jSpinner3.setValue(20);
+    }
+    
     public void disableFields(){
         jComboBox2.setEnabled(false);
-        jTextField1.setEditable(false);
+        jTextField1.setEnabled(false);
     }
     
         //This allow us to unblock the disabled fields depending of the Pokemon incomming
@@ -242,6 +257,7 @@ public class AddPokemon extends javax.swing.JFrame {
         }
     }
     
+    //That's util to add specific pokemon to their family:, well... no util, but necessary.
     public void addPokeWater(){
         String type = jComboBox2.getSelectedItem().toString();
         String name = jTextField2.getText();
@@ -268,7 +284,6 @@ public class AddPokemon extends javax.swing.JFrame {
         FireType pkm = new FireType(name,atk,def,hp);
         AllPokemon.put(pkm.getName(),pkm);
     }
-    
     
     /**
      * @param args the command line arguments
@@ -313,6 +328,7 @@ public class AddPokemon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
@@ -328,7 +344,6 @@ public class AddPokemon extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 //   (\_(\
