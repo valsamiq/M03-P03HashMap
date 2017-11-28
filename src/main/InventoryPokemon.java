@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.util.ArrayList;
+import objects.Pokemon;
+
 /**
  *
  * @author balsamiq
@@ -12,12 +15,22 @@ package main;
 public class InventoryPokemon extends javax.swing.JDialog {
 
     static String SelectedType = "";
+    
+    ArrayList<Pokemon> PokeShowList = new ArrayList<>();
+    int tmp = 0;
+    
     /**
      * Creates new form InventoryPokemon
      */
     public InventoryPokemon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
         initComponents();
+        disableTextFields();
+        
+        //Disable the "next" and "previous" buttons, until Type is selected.
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
         
     }
 
@@ -240,9 +253,10 @@ public class InventoryPokemon extends javax.swing.JDialog {
             }
         });
     }
+    //Indentify the Type selected.
     public void TypeSelected(String type){
         if(type.equals("Water")){
-
+            
         }
         if(type.equals("Fire")){
 
@@ -250,6 +264,15 @@ public class InventoryPokemon extends javax.swing.JDialog {
         if(type.equals("Plant")){
 
         }
+    }
+    //Set all the infoTextFields non-Editables-
+    public void disableTextFields(){
+        jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
+        jTextField3.setEditable(false);
+        jTextField4.setEditable(false);
+        jTextField5.setEditable(false);
+        jTextField6.setEditable(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
