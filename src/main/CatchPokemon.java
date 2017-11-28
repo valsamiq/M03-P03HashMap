@@ -25,6 +25,7 @@ public class CatchPokemon extends javax.swing.JDialog {
     public CatchPokemon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        getAllPokemon();
         jLabel3.setVisible(false);
         jLabel4.setVisible(false);
     }
@@ -44,6 +45,7 @@ public class CatchPokemon extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -52,12 +54,24 @@ public class CatchPokemon extends javax.swing.JDialog {
         jLabel2.setText("Select the Pokemon you want to catch(or tryit at least...):");
 
         jButton1.setText("Catch'em!");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel3.setText("Succes! Now it's yours!");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         jLabel4.setText("Failed... :(");
+
+        jButton2.setText("Return");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +91,10 @@ public class CatchPokemon extends javax.swing.JDialog {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,11 +111,22 @@ public class CatchPokemon extends javax.swing.JDialog {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Catch Button
+        CatchPokemon();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,6 +171,7 @@ public class CatchPokemon extends javax.swing.JDialog {
     }
     public void CatchPokemon(){
         String tmpPos=jComboBox1.getSelectedItem().toString();
+        //Into every pokeType, there's its way to be catched. Are Triggered from here:
         for(Pokemon pkm : AllPokemon.values()){
             if(tmpPos.equals(AllPokemon.get(pkm.getName()).getName())){
                 if(pkm.catchable()==true){
@@ -149,6 +179,7 @@ public class CatchPokemon extends javax.swing.JDialog {
                     jLabel4.setVisible(false);
                 }
                 else{
+                    
                     jLabel3.setVisible(false);
                     jLabel4.setVisible(true);
                 }
@@ -170,6 +201,7 @@ public class CatchPokemon extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

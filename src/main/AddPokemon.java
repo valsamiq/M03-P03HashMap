@@ -74,7 +74,7 @@ public class AddPokemon extends javax.swing.JFrame {
 
         jLabel8.setText("Habitat:");
 
-        jToggleButton2.setText("Cancel");
+        jToggleButton2.setText("Return");
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
