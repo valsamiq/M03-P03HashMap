@@ -17,7 +17,15 @@ public class FireType extends Pokemon {
 
     @Override
     public boolean catchable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int min=10,max=60;
+        int tmp =((int)(Math.random()*(min-max+1))+min) + getHp();
+        int antiCatch = getAtk()+getDef();
+        if(tmp > antiCatch){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 //   (\_(\
 // =( °w° )=

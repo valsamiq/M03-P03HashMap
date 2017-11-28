@@ -26,8 +26,16 @@ public class PlantType extends Pokemon{
     }
     @Override
     public boolean catchable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int min=0, max=50;
+        int tmp =((int)(Math.random()*(min-max+1))+min) + getAtk();        
+        if(tmp > getHp()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
+    
 //   (\_(\
 // =( °w° )=
 //   )   ( //

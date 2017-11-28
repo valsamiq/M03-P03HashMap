@@ -6,7 +6,13 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import objects.Pokemon;
+import objects.FireType;
+import objects.PlantType;
+import objects.WaterType;
+import static main.M03P03HashMap.AllPokemon;
 
 /**
  *
@@ -14,24 +20,24 @@ import objects.Pokemon;
  */
 public class InventoryPokemon extends javax.swing.JDialog {
 
-    static String SelectedType = "";
-    
+    static String Selection = "";
+
     ArrayList<Pokemon> PokeShowList = new ArrayList<>();
-    int tmp = 0;
-    
+    int tmpPos = 0;
+
     /**
      * Creates new form InventoryPokemon
      */
     public InventoryPokemon(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+
         initComponents();
         disableTextFields();
-        
+
         //Disable the "next" and "previous" buttons, until Type is selected.
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);
-        
+
     }
 
     /**
@@ -96,6 +102,11 @@ public class InventoryPokemon extends javax.swing.JDialog {
         jButton2.setText("Previous");
 
         jButton3.setText("Next");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Return");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -204,13 +215,25 @@ public class InventoryPokemon extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        //Return button.
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        SelectedType = jComboBox1.getSelectedItem().toString();
-        TypeSelected(SelectedType);
+        //When a type is selected, it everithing starts.
+        Selection = jComboBox1.getSelectedItem().toString();
+        
+        if(Selection.equals("Water")){
+            resetList();
+            getAllPokemon();
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        tmpPos = tmpPos + 1;
+        TypeSelected(tmpPos);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,26 +276,131 @@ public class InventoryPokemon extends javax.swing.JDialog {
             }
         });
     }
-    //Indentify the Type selected.
-    public void TypeSelected(String type){
-        if(type.equals("Water")){
-            
-        }
-        if(type.equals("Fire")){
 
+    //Indentify the Type selected, and write on the fields the Info.
+    public void TypeSelected(int tmpPos) {
+        jTextField1.setText(PokeShowList.get(tmpPos).getName());
+        jTextField2.setText(Integer.toString(PokeShowList.get(tmpPos).getAtk()));
+        jTextField3.setText(Integer.toString(PokeShowList.get(tmpPos).getDef()));
+        jTextField4.setText(Integer.toString(PokeShowList.get(tmpPos).getHp()));
+        if (PokeShowList.get(tmpPos) instanceof WaterType) {
+            WaterType w = (WaterType) PokeShowList.get(tmpPos);
+            jTextField5.setText(w.getType());
+            jTextField6.setText("");
         }
-        if(type.equals("Plant")){
-
+        if (PokeShowList.get(tmpPos) instanceof PlantType) {
+            PlantType p = (PlantType) PokeShowList.get(tmpPos);
+            jTextField5.setText("");
+            jTextField6.setText(p.getHab());
         }
     }
+
     //Set all the infoTextFields non-Editables-
-    public void disableTextFields(){
+    public void disableTextFields() {
         jTextField1.setEditable(false);
         jTextField2.setEditable(false);
         jTextField3.setEditable(false);
         jTextField4.setEditable(false);
         jTextField5.setEditable(false);
         jTextField6.setEditable(false);
+    }    
+    //Get Methods, courtesy of kelvinlt (I was stuck here, so he offered to help me)
+    public void getAllPokemon() {
+        resetList();
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ops, There's no pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                PokeShowList.add(entry.getValue());
+                TypeSelected(tmpPos);
+            }
+            checkTmpPos(tmpPos);
+        }
+    }
+    public void getWaterPokemon() {
+        resetList();
+        int tmp=0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ops, There's no pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } 
+        else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if(entry.getValue() instanceof WaterType){
+                    PokeShowList.add(entry.getValue());
+                    TypeSelected(tmpPos);
+                    tmp++;
+                }
+            }
+            if(tmp==0){
+                JOptionPane.showMessageDialog(null, "Ops, There's no water pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                checkTmpPos(tmpPos);    
+            }
+        }
+    }
+    public void getFirePokemon() {
+        resetList();
+        int tmp=0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ops, There's no pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if(entry.getValue() instanceof FireType){
+                    PokeShowList.add(entry.getValue());
+                    TypeSelected(tmpPos);
+                    tmp++;
+                }
+            }
+            if(tmp==0){
+                JOptionPane.showMessageDialog(null, "Ops, There's no fire pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                checkTmpPos(tmpPos);
+            }
+        }
+    }
+    public void getPlantPokemon() {
+        resetList();
+        int tmp=0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ops, There's no pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if(entry.getValue() instanceof PlantType){
+                    PokeShowList.add(entry.getValue());
+                    TypeSelected(tmpPos);
+                }
+            }
+            if(tmp==0){
+                JOptionPane.showMessageDialog(null, "Ops, There's no fire pokemon inside here!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                checkTmpPos(tmpPos);
+            }
+            
+        }
+    }
+    public void resetList() {
+        PokeShowList.clear();
+        tmpPos = 0;
+    }    
+    //Check the actual show positon, to manage the navigation buttons.
+    public void checkTmpPos(int tmpPos){
+        if(tmpPos==0){
+            //0 Means, InitPos, there's nothing before this.
+            jButton2.setEnabled(false);
+        }
+        else{
+            jButton2.setEnabled(true);
+        }
+        if(tmpPos==PokeShowList.size()-1){
+            //If it reaches the last Array-position, disable the Next button.
+            jButton3.setEnabled(false);
+        }
+        else{
+            jButton3.setEnabled(true);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

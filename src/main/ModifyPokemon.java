@@ -241,11 +241,10 @@ public class ModifyPokemon extends javax.swing.JFrame {
                 
                 AllPokemon.put(i, selected);
                 JOptionPane.showMessageDialog(this, "Values changed correctly!","Modification Success", JOptionPane.ERROR_MESSAGE);
-                
             }
         }
     }
-
+    
     public void selPokeList(){
         String tmp = jComboBox1.getSelectedItem().toString();
         for(Pokemon p : AllPokemon.values()){

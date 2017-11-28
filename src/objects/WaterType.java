@@ -28,12 +28,18 @@ public class WaterType extends Pokemon {
 
     @Override
     public boolean catchable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int min=20,max=100;
+        int rand =((int)(Math.random()*((max-min)+1))+min) - getHp();
+        if(rand > getDef()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 //   (\_(\
 // =( °w° )=
 //   )   ( //
 //  (__ __)/
 // balsamiq   
-
 }
