@@ -2,9 +2,6 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 import objects.Pokemon;
-/**
- * @author balsamiq
- */
 public class M03P03HashMap {
 
     public static void main(String[] args) {
@@ -19,5 +16,5 @@ public class M03P03HashMap {
 // =( °w° )=
 //   )   ( //
 //  (__ __)/
-// balsamiq   
+// balsamiq
 }

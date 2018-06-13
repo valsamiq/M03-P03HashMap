@@ -210,17 +210,20 @@ public class AddPokemon extends javax.swing.JFrame {
         if(TypePokemon.equals("")){
             JOptionPane.showMessageDialog(this, "PokeType Wrong Selected","PokeError", JOptionPane.OK_OPTION);
         }if(TypePokemon.equals("Water")){
-            addPokeWater();
-            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
-            restartValues();
+            if(addPokeWater()){
+                JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+                restartValues();
+            }
         }if(TypePokemon.equals("Fire")){
-            addPokeFire();
-            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
-            restartValues();
+            if(addPokeFire()){
+                JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+                restartValues();
+            }
         }if(TypePokemon.equals("Plant")){
-            addPokePlant();
-            JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
-            restartValues();
+            if(addPokePlant()){
+                JOptionPane.showMessageDialog(this, "New Pokemon added correctly!","Pokemon Added", JOptionPane.OK_OPTION);
+                restartValues();
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     public void restartValues(){
@@ -256,32 +259,95 @@ public class AddPokemon extends javax.swing.JFrame {
         }
     }
     
-    //That's util to add specific pokemon to their family:, well... no util, but necessary.
-    public void addPokeWater(){
+    //That's very usefull to add specific pokemon to their family:, well... no usefull, but necessary.
+    public boolean addPokeWater(){
         String type = jComboBox2.getSelectedItem().toString();
         String name = jTextField2.getText();
         int atk = (int) jSpinner1.getValue();
         int def = (int) jSpinner2.getValue();
         int hp = (int) jSpinner3.getValue();
-        WaterType pkm = new WaterType(type,name,atk,def,hp);
-        AllPokemon.put(pkm.getName(),pkm);
+        if(!name.isEmpty()){
+            if(AllPokemon.isEmpty()){
+                WaterType pkm = new WaterType(type,name,atk,def,hp);
+                AllPokemon.put(pkm.getName(),pkm);
+                return true;
+            }
+            else{
+                if(AllPokemon.containsKey((name))){
+                    alertDucplciate();
+                    return false;
+                }else{
+                    WaterType pkm = new WaterType(type,name,atk,def,hp);
+                    AllPokemon.put(pkm.getName(),pkm);
+                    //JOptionPane.showMessageDialog(null, "WaterPkm added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+            }
+        }else{
+            blankName();
+            return false;
+        }
     }
-    public void addPokePlant(){
+    public boolean addPokePlant(){
         String hab = jTextField1.getText();
         String name = jTextField2.getText();
         int atk = (int) jSpinner1.getValue();
         int def = (int) jSpinner2.getValue();
         int hp = (int) jSpinner3.getValue();
-        PlantType pkm = new PlantType(hab,name,atk,def,hp);
-        AllPokemon.put(pkm.getName(),pkm);
+        if(!name.isEmpty()){
+            if(AllPokemon.isEmpty()){
+                PlantType pkm = new PlantType(hab,name,atk,def,hp);
+                AllPokemon.put(pkm.getName(),pkm);
+                return true;
+            }
+            else{
+                if(AllPokemon.containsKey((name))){
+                    alertDucplciate();
+                    return false;
+                }else{
+                    PlantType pkm = new PlantType(hab,name,atk,def,hp);
+                    AllPokemon.put(pkm.getName(),pkm);
+                    //JOptionPane.showMessageDialog(null, "PlantPkm added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+            }
+        }else{
+            blankName();
+            return false;
+        }
     }
-    public void addPokeFire(){
+    public boolean addPokeFire(){
         String name = jTextField2.getText();
         int atk = (int) jSpinner1.getValue();
         int def = (int) jSpinner2.getValue();
         int hp = (int) jSpinner3.getValue();
-        FireType pkm = new FireType(name,atk,def,hp);
-        AllPokemon.put(pkm.getName(),pkm);
+        if(!name.isEmpty()){
+            if(AllPokemon.isEmpty()){
+                FireType pkm = new FireType(name,atk,def,hp);
+                AllPokemon.put(pkm.getName(),pkm);
+                return true;
+            }
+            else{
+                if(AllPokemon.containsKey((name))){
+                    alertDucplciate();
+                    return false;
+                }else{
+                    FireType pkm = new FireType(name,atk,def,hp);
+                    AllPokemon.put(pkm.getName(),pkm);
+                    //JOptionPane.showMessageDialog(null, "PlantPkm added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+            }
+        }else{
+            blankName();
+            return false;
+        }
+    }
+    public void alertDucplciate(){
+        JOptionPane.showMessageDialog(null, "There is another pokemon with that name.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    public void blankName(){
+        JOptionPane.showMessageDialog(null, "There's no name inserted", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
     /**
