@@ -137,7 +137,10 @@ public class Frame0 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Route to PokeVentory; or View Pokemon (Searching by Type)
-        InventoryPokemon frame = new InventoryPokemon(this, true);
+        
+        //InventoryPokemon frame = new InventoryPokemon(this, true);
+        
+        ViewPokemon frame = new ViewPokemon();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed

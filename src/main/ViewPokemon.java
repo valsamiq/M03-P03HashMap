@@ -5,11 +5,25 @@
  */
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
+import objects.Pokemon;
+import static main.M03P03HashMap.AllPokemon;
+import objects.Pokemon;
+import objects.FireType;
+import objects.PlantType;
+import objects.WaterType;
+
 /**
  *
  * @author daw2
  */
 public class ViewPokemon extends javax.swing.JFrame {
+
+    ArrayList<Pokemon> pokeList = new ArrayList<Pokemon>();
+    int actual = 0;
 
     /**
      * Creates new form ViewPokemon
@@ -41,15 +55,27 @@ public class ViewPokemon extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(350, 500));
 
         jLabel1.setText("PokeVentory, the Pokemon's Inventory");
 
         jLabel2.setText("Searck by type:");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All Pokemon", "Fire", "Plant", "Water" }));
+
         jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Name:");
 
@@ -64,12 +90,39 @@ public class ViewPokemon extends javax.swing.JFrame {
         jLabel8.setText("Water:");
 
         jButton2.setText("Previous");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Next");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Return");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("jLabel9");
+
+        jLabel10.setText("jLabel10");
+
+        jLabel11.setText("jLabel11");
+
+        jLabel12.setText("jLabel12");
+
+        jLabel13.setText("jLabel13");
+
+        jLabel14.setText("jLabel14");
+
+        jLabel15.setText("jLabel15");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,18 +141,29 @@ public class ViewPokemon extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1))
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel11)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jButton1))))))
                         .addGap(0, 41, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -114,19 +178,30 @@ public class ViewPokemon extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel13))
+                .addGap(69, 69, 69)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -137,10 +212,186 @@ public class ViewPokemon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+public void cleanList() {
+        pokeList.clear();
+        actual = 0;
+    }
+
+    public void cleanjLabel() {
+        jLabel9.setText("");
+        jLabel10.setText("");
+        jLabel11.setText("");
+        jLabel12.setText("");
+        jLabel13.setText("");
+        jLabel14.setText("");
+        jLabel15.setText("");
+    }
+
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        actual += 1;
+        searchByIndex(actual);
+        checkPos(actual);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        actual -= 1;
+        searchByIndex(actual);
+        checkPos(actual);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String tipoLista = jComboBox1.getSelectedItem().toString();
+
+        switch (tipoLista) {
+            case "All Pokemon":
+                cleanjLabel();
+                getAllPokemon();
+                break;
+            case "Water":
+                cleanjLabel();
+                getAllWater();
+                break;
+            case "Fire":
+                cleanjLabel();
+                getAllFire();
+                break;
+            case "Plant":
+                cleanjLabel();
+                getAllPlant();
+                break;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    public void getAllPokemon() {
+        cleanList();
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There's noone here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                pokeList.add(entry.getValue());
+                searchByIndex(actual);
+            }
+            checkPos(actual);
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
+    public void checkPos(int actual) {
+        if (actual == 0) {
+            jButton2.setEnabled(false);
+        } else {
+            jButton2.setEnabled(true);
+        }
+        if (actual == (pokeList.size() - 1)) {
+            jButton3.setEnabled(false);
+        } else {
+            jButton3.setEnabled(true);
+        }
+    }
+
+    public void searchByIndex(int actual) {
+
+        jLabel10.setText(pokeList.get(actual).getName());
+        if (pokeList.get(actual) instanceof WaterType) {
+            jLabel9.setText("Water");
+        }
+        if (pokeList.get(actual) instanceof PlantType) {
+            jLabel9.setText("Plant");
+        }
+        if (pokeList.get(actual) instanceof FireType) {
+            jLabel9.setText("Fire");
+        }
+        jLabel11.setText(Integer.toString(pokeList.get(actual).getAtk()));
+        jLabel12.setText(Integer.toString(pokeList.get(actual).getDef()));
+        jLabel13.setText(Integer.toString(pokeList.get(actual).getHp()));
+        if (pokeList.get(actual) instanceof PlantType) {
+            PlantType n = (PlantType) pokeList.get(actual);
+            jLabel14.setText(n.getHab());
+            jLabel15.setText("");
+        }
+        if (pokeList.get(actual) instanceof WaterType) {
+            WaterType n = (WaterType) pokeList.get(actual);
+            jLabel15.setText(n.getType());
+            jLabel14.setText("");
+        }
+        if (pokeList.get(actual) instanceof FireType) {
+            FireType n = (FireType) pokeList.get(actual);
+            jLabel14.setText("");
+            jLabel15.setText("");
+        }
+    }
+
+    //Gets
+    //--------------------------------------------------------------------------
+    public void getAllPlant() {
+        cleanList();
+        int contador = 0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There's noone here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if (entry.getValue() instanceof PlantType) {
+                    pokeList.add(entry.getValue());
+                    searchByIndex(actual);
+                    contador++;
+                }
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(null, "There's noone here! (No Plant)", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                checkPos(actual);
+            }
+        }
+    }
+
+    public void getAllWater() {
+        cleanList();
+        int contador = 0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There's noone here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if (entry.getValue() instanceof WaterType) {
+                    pokeList.add(entry.getValue());
+                    searchByIndex(actual);
+                    contador++;
+                }
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(null, "There's noone here! (No Water)", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                checkPos(actual);
+            }
+        }
+    }
+
+    public void getAllFire() {
+        cleanList();
+        int contador = 0;
+        if (AllPokemon.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "There's noone here!", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            for (Map.Entry<String, Pokemon> entry : AllPokemon.entrySet()) {
+                if (entry.getValue() instanceof FireType) {
+                    pokeList.add(entry.getValue());
+                    searchByIndex(actual);
+                    contador++;
+                }
+            }
+            if (contador == 0) {
+                JOptionPane.showMessageDialog(null, "There's noone here! (No Fire)", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                checkPos(actual);
+            }
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -180,6 +431,12 @@ public class ViewPokemon extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
